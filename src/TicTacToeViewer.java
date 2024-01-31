@@ -46,13 +46,49 @@ public class TicTacToeViewer extends JFrame {
             for(int j = 0; j< 3; j++){
                 //Draw Images for X and O
                 g.drawRect(xBuffer + (j*sideLength),yBuffer + (i*sideLength),sideLength,sideLength);
-                if(b[i][j].getMarker().equals("O")){
+                if(b[i][j].getMarker().equals(TicTacToe.O_MARKER)){
                     g.drawImage(o, iBuffer + (xBuffer*j), iBuffer + (yBuffer*i), iSize, iSize, this);
                 }
-                if(b[i][j].getMarker().equals("X")){
+                if(b[i][j].getMarker().equals(TicTacToe.X_MARKER)){
                     g.drawImage(x, iBuffer + (xBuffer*j), iBuffer + (yBuffer*i), iSize, iSize, this);
                 }
             }
         }
+        if(t.getGameOver()){
+            this.drawWin(g);
+        }
+
+
+    }
+
+    public void drawWin(Graphics g){
+        int spot = 0;
+        g.setColor(Color.green);
+        g.setFont(new Font("Serif", Font.PLAIN, 30));
+        if(t.getWinner().equalsIgnoreCase(TicTacToe.O_MARKER)){
+            g.drawString("O Wins!", 200, 450);
+            if(t.getwinDirection() == TicTacToe.COL_WIN){
+                spot = t.getwinIndex();
+                for(int i = 0; i < 3; i++){
+                    g.fillRect(xBuffer, yBuffer + (spot*sideLength), sideLength, sideLength);
+                }
+            }
+            else if(t.getwinDirection() == TicTacToe.ROW_WIN){
+                spot = t.getwinIndex();
+                for(int i = 0; i < 3; i++){
+                    g.fillRect(xBuffer + (spot*sideLength), yBuffer, sideLength, sideLength);
+                }
+            }
+
+        }
+        else if (t.getWinner().equalsIgnoreCase(TicTacToe.X_MARKER)){
+            g.drawString("X Wins!", 200, 450);
+        }
+        else{
+            g.drawString("Its a Tie!", 200, 450);
+        }
+
     }
 }
+
+

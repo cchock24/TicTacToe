@@ -79,6 +79,13 @@ public class TicTacToe
         return this.isGameOver && this.winner.equals(BLANK);
     }
 
+    public int getwinIndex(){
+        return this.winIndex;
+    }
+
+    public int getwinDirection(){
+        return this.winDirection;
+    }
     /**
      * Gets the direction and index of the win
      * and marks the winning squares
@@ -142,7 +149,9 @@ public class TicTacToe
                 this.winner = X_MARKER;
                 System.out.println("X Wins!");
             }
+            window.repaint();
         }
+
     }
 
 
